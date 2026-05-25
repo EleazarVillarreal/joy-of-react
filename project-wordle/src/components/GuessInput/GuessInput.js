@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function GuessInput({ handleGuessSubmit }) {
+function GuessInput({ handleGuessSubmit, disabled = false }) {
   const [guess, setGuess] = useState('');
 
   function handleChange(event) {
@@ -17,6 +17,7 @@ function GuessInput({ handleGuessSubmit }) {
     <form className="guess-input-wrapper" onSubmit={handleSubmit}>
       <label htmlFor="guess-input">Enter Guess:</label>
       <input
+        disabled={disabled}
         required
         minLength={5}
         maxLength={5}
