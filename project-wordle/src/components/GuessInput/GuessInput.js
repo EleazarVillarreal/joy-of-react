@@ -1,7 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-function GuessInput({ handleGuessSubmit, disabled = false }) {
-  const [guess, setGuess] = useState('');
+function GuessInput({
+  guess,
+  setGuess,
+  handleGuessSubmit,
+  onLetterKeyDown,
+  onLetterKeyUp,
+  onClearPressedKey,
+  disabled = false,
+}) {
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -20,6 +27,24 @@ function GuessInput({ handleGuessSubmit, disabled = false }) {
     setGuess('');
   }
 
+  function handleKeyDown(event) {
+    if (disabled) {
+      return;
+    }
+
+    const letter = event.key.toUpperCase();
+    if (/^[A-Z]$/.test(letter)) {
+      onLetterKeyDown(letter);
+    }
+  }
+
+  function handleKeyUp(event) {
+    const letter = event.key.toUpperCase();
+    if (/^[A-Z]$/.test(letter)) {
+      onLetterKeyUp(letter);
+    }
+  }
+
   return (
     <form className="guess-input-wrapper" onSubmit={handleSubmit}>
       <label htmlFor="guess-input">Enter Guess:</label>
@@ -35,6 +60,9 @@ function GuessInput({ handleGuessSubmit, disabled = false }) {
         type="text"
         value={guess}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        onKeyUp={handleKeyUp}
+        onBlur={onClearPressedKey}
       />
     </form>
   );
