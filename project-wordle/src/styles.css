@@ -122,20 +122,31 @@ h1 {
   --radius: 0px 0px 0px 4px;
 }
 
-.cell.correct {
+.cell.correct,
+.key.correct {
   background: var(--color-success);
+  color: white;
+}
+.cell.correct {
   border-color: var(--color-success);
+}
+
+.cell.incorrect,
+.key.incorrect {
+  background: var(--color-gray-300);
   color: white;
 }
 .cell.incorrect {
-  background: var(--color-gray-300);
   border-color: var(--color-gray-300);
+}
+
+.cell.misplaced,
+.key.misplaced {
+  background: var(--color-warning);
   color: white;
 }
 .cell.misplaced {
-  background: var(--color-warning);
   border-color: var(--color-warning);
-  color: white;
 }
 
 .guess-input-wrapper {
@@ -244,21 +255,6 @@ h1 {
 .key.unused {
   background: var(--color-gray-900);
   color: black;
-}
-
-.key.correct {
-  background: var(--color-success);
-  color: white;
-}
-
-.key.misplaced {
-  background: var(--color-warning);
-  color: white;
-}
-
-.key.incorrect {
-  background: var(--color-gray-300);
-  color: white;
 }
 
 .key.active {
