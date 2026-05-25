@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 function GuessInput({ handleGuessSubmit, disabled = false }) {
   const [guess, setGuess] = useState('');
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (!disabled) {
+      inputRef.current?.focus();
+    }
+  }, [disabled]);
 
   function handleChange(event) {
     setGuess(event.target.value.toUpperCase());
@@ -17,6 +24,7 @@ function GuessInput({ handleGuessSubmit, disabled = false }) {
     <form className="guess-input-wrapper" onSubmit={handleSubmit}>
       <label htmlFor="guess-input">Enter Guess:</label>
       <input
+        ref={inputRef}
         disabled={disabled}
         required
         minLength={5}
